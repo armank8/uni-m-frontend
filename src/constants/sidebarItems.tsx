@@ -6,6 +6,7 @@ import {
     TeamOutlined,
     UserOutlined,
 } from '@ant-design/icons';
+import Link from 'next/link';
 
 export const sidebarItems = (role: string) => {
     const defaultSidebarItems: MenuProps["items"] = [
@@ -19,10 +20,18 @@ export const sidebarItems = (role: string) => {
             },
             {
                 label: "Change Password",
-                key: 'profile'
+                key: 'change-password'
             }
             ],
         }
     ]
-    if(role==='student') return defaultSidebarItems;
+
+    const commonAdminSidebarItems: MenuProps["items"] = [
+        {
+            label: <Link href={`${role}/manage-student`}>Manage Students</Link>,
+            key: "manage-students",
+        }
+    ]
+    if (role === 'student') return defaultSidebarItems;
+    else if (role === 'admin') return commonAdminSidebarItems;
 }
