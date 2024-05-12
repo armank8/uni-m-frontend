@@ -1,17 +1,32 @@
-import { useForm, FormProvider, useFormContext } from "react-hook-form";
+import { ReactElement, ReactNode } from "react";
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+type FormConfig = {
+    defaultValues?: Record<string, any>
+};
 
+type FormProps = {
+    children?: ReactElement | ReactNode;
+    SubmitHandler: SubmitHandler<any>;
+} & FormConfig;
 
-export default function Form({children,submitHandler,defaultValues}) {
-    const methods = useForm()
+export default function Form({ children, submitHandler, defaultValues }: FormProps) {
+    const formConfig: FormConfig = {};
+    if (!!defaultValues) formConfig["defaultValues"] = defaultValues;
 
-    const onSubmit = (data) => console.log(data)
-  
+    const methods = useForm<FormProps>(formConfig);
+    const { handleSubmit, reset } = methods;
+
+    const onSubmit = (data: any) => {
+        submitHandler(data);
+        reset();
+    }
+
     return (
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-         
-        </form>
-      </FormProvider>
+        <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+                {children}
+            </form>
+        </FormProvider>
     )
 }
 
