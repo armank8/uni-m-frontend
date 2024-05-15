@@ -6,7 +6,7 @@ type FormConfig = {
 
 type FormProps = {
     children?: ReactElement | ReactNode;
-    SubmitHandler: SubmitHandler<any>;
+    submitHandler: SubmitHandler<any>;
 } & FormConfig;
 
 export default function Form({ children, submitHandler, defaultValues }: FormProps) {
@@ -23,10 +23,10 @@ export default function Form({ children, submitHandler, defaultValues }: FormPro
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 {children}
             </form>
-        </FormProvider>
+        </FormProvider>  
     )
 }
 
