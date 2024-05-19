@@ -23,17 +23,17 @@ const LoginPage = () => {
   return (
     <Row justify="center" style={{ minHeight: "100vh" }} align="middle">
       <Col sm={12} md={16} lg={10}>
-        <Image src={loginImage} width={500} height={500}></Image>
+        <Image src={loginImage} width={500} height={500} alt=""></Image>
       </Col>
       <Col sm={12} md={8} lg={8}>
         <h1 style={{margin:"15px 0px"}}>FIrst login your account</h1>
         <div>
           <Form submitHandler={onSubmit}>
             <div  style={{margin:"15px 0px"}}>
-              <FormInput name="id" type="text" size="large" label="User Id"></FormInput>
+              <FormInput name="id" type="text" size="large" label="User Id" value=""></FormInput>
             </div>
             <div>
-              <FormInput name="password" type="password" size="large" label="User Password"></FormInput>
+              <FormInput name="password" type="password" size="large" label="User Password" value=""></FormInput>
             </div>
             <Button type="primary" htmlType="submit">Login</Button>
           </Form>
